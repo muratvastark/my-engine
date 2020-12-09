@@ -4,6 +4,7 @@ const Mongoose = require("mongoose");
 const Commands = (Moderation.Commands = new Collection());
 const Defaults = (Moderation.Defaults = require("../global.json").Defaults);
 Moderation.Permissions = require("../global.json").Permissions;
+Moderation.Snipes = {};
 const { CronJob } = require("cron");
 const { StatsModel } = require("./Helpers/models.js");
 const fs = require("fs");
