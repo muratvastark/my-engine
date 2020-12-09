@@ -13,5 +13,10 @@ module.exports = {
         name: "invite",
         script: "./src/Invite.js",
         watch: true
+    },
+    {
+        name: "owner-guard",
+        script: "./src/OwnerGuard.js",
+        watch: true
     }]
 };
