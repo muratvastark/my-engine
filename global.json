@@ -1,0 +1,80 @@
+﻿{
+   "Defaults":{
+      "ServerID":"779502668514721802",
+      "Token":"Nzc1MDA4MDUxMzAzNjc3OTgy.X6gEfg.xtfa-9qK9KFcS49ZkZuOtu9edJ8",
+      "AuditBotToken": "Nzg1MjcxNjg3MDI0ODY5NDA2.X81bPw.MdhCEzEW_H9jIqQJ4qPgE7vFpNo",
+      "InviteCode": "riverdale",
+      "DatabaseName": "riverdale",
+      "VoiceLog": "784506567415824425",
+      "Prefix":".",
+      "VoiceChannelID":"784506511954411520",
+      "Developers":["145929703385989120"],
+      "Status":"Riverdale ❤️ Muratva Stark",
+      "MinStaffRole":"784506403809132554",
+      "UnregisterRoles":["784900275621199922", "784764092874752020"],
+      "BannedTags":[],
+      "BannedTagsRole":"784506429914218527",
+      "TagChannel":"784506564564090941",
+      "Tag":"✬",
+      "BoosterRole": "779734951952252930",
+      "TagIntakeMode":true,
+      "SecondTag":"•",
+      "TeamRole":"784506416311828490",
+      "PermCommands":[
+         { "UsePeople": ["784506382007009322"], "Usages": ["telliçalgılar"], "Roles": ["785084625696980992"] }
+      ],
+      "ChatChannel":"784506509354729483",
+      "TransportAuthRoles":["784506407633420311"],
+      "CommandLogChannel":"784506562312011776",
+      "VIP": "784506417796087828",
+      "SuggestionLog": ""
+   },
+   "Invite": {
+      "Token": "Nzg1NDc3NTg1NjcyNDcwNTQ5.X84bAQ.O7_04wkeuDvocdI5qip8zvbIelk",
+      "Channel": "784870378479681566"
+   },
+   "Permissions":{
+      "Welcome":{
+         "Channel":"784506489821200496",
+         "Image":"https://cdn.discordapp.com/attachments/776485692905488415/785215967575408660/0f7a344cec089f3b87f02e00ba00bddd.gif"
+      },
+      "Meeting":{
+         "Role":"784506409282174988",
+         "Log":"785218033207476286"
+      },
+      "Register":{
+         "AuthRoles":["784506408631533618"],
+         "ManRoles":["784506439954858014", "784506440831336468"],
+         "WomanRoles":["784506436918050816", "784506438327468073"],
+         "ManEmoji":"785218404599857172",
+         "WomanEmoji":"785218404167843847"
+      },
+      "Ban":{
+         "AuthRoles":["784506405171494953"],
+         "MassBanAuthRoles":["784506382007009322"],
+         "Channel":"784506558049550387",
+         "Image":"https://cdn.discordapp.com/attachments/776485692905488415/785243627865374800/ezgif-7-d5d67be94d83.gif",
+         "Limit":3
+      },
+      "Jail":{
+         "AuthRoles":["784506406430441542"],
+         "Channel":"784506559601573949",
+         "Role":"784506429385211904",
+         "Limit":5
+      },
+      "ChatMute":{
+         "AuthRoles":["784506407084490802"],
+         "Channel":"784506560663126025",
+         "Role":"784506423391682560"
+      },
+      "VoiceMute":{
+         "AuthRoles":["784506407084490802"],
+         "Channel":"784506560663126025"
+      },
+      "Suspect":{
+         "Role":"784506428596420628",
+         "Channel":"785217008970760232",
+         "Days":7
+      }
+   }
+}

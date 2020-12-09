@@ -1,0 +1,31 @@
+{
+  "name": "my-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "pm2 start ecosystem.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muratvastark/my-engine.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/muratvastark/my-engine/issues"
+  },
+  "homepage": "https://github.com/muratvastark/my-engine#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "canvacord": "^5.0.8",
+    "cron": "^1.8.2",
+    "discord-logs": "^1.7.7",
+    "discord.js": "^12.5.1",
+    "fs": "0.0.1-security",
+    "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
+    "mongoose": "^5.11.6"
+  }
+}
