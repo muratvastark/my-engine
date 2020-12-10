@@ -27,7 +27,7 @@ exports.onLoad = (Moderation) => {
             const Member = message.mentions.users.first();
             const Data = Afk.get(Member.id) || {};
             if (!Data) return;
-            message.channel.send(Embed.setDescription(`Etiketlediğin kullanıcı ${data.Reason ? `**${data.Reason}** sebebiyle AFK!` : "AFK!"} (**${Moment(data.Now).fromNow()}**)`));
+            message.channel.send(Embed.setDescription(`Etiketlediğin kullanıcı ${Data.Reason ? `**${Data.Reason}** sebebiyle AFK!` : "AFK!"} (**${Moment(Data.Now).fromNow()}**)`));
         }
     });
 }
@@ -35,11 +35,10 @@ exports.onLoad = (Moderation) => {
 exports.run = async (Moderation, message, args) => {
     const Reason = args.join(" ") || "";
     const InviteRegExp = /(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i;
-    const LinkRegExp = /(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi;
 
-    if (InviteRegExp.test(message.content) && LinkRegExp.test(message.content) || !message.deleted) return message.channel.send("Geçerli bir sebep belirt!");
+    if (InviteRegExp.test(message.content) || !message.deleted) return;
     Afk.set(message.author.id, {
-        Reason: Reason.length > 0 ? Reason : null,
+        Reason: Reason.length > 0 ? Reason.slice(0, 2000) : null,
         Now: Date.now()
     });
     message.delete({ timeout: 200 })
