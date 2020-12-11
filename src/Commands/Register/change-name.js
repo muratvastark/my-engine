@@ -38,6 +38,5 @@ exports.run = async (Moderation, message, args) => {
 exports.conf = {
     commands: ["isim", "name", "nick"],
     enabled: true,
-    usage: "
-    ([Nick](Booster) | [Üye] [İsim] [Yaş])"
+    usage: "isim ([Nick](Booster) | [Üye] [İsim] [Yaş])"
 };
