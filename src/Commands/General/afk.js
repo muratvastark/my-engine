@@ -5,7 +5,7 @@ Moment.locale("tr");
 
 exports.onLoad = (Moderation) => {
     Moderation.on("message", (message) => {
-        if ((!message.guild && message.channel.type === "dm") || message.author.bot || message.content.toLowerCase().startsWith(`${Moderation.Defaults.ModerationBotPrefix}afk`)) return;
+        if ((!message.guild && message.channel.type === "dm") || message.author.bot || message.content.toLowerCase().startsWith(`${Moderation.Defaults.Prefix}afk`)) return;
 
         const Embed = new MessageEmbed().setColor("RANDOM");
 
