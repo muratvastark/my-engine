@@ -8,7 +8,7 @@ exports.run = async (Moderation, message, args) => {
         if (!args || !args.length   ) return message.reply("sunucudaki ismini mi değiştireceksin? Değiştireceksen bir isim girmelisin.");
         const Name = `${Member.user.username.includes(Tag) ? Tag : SecondTag} ${args.join(" ")}`;
         if (Name.length > 30) return message.reply("ismin 30 karakterden büyük olamaz.");
-        message.member.setNickname(isim);
+        message.member.setNickname(Name);
         message.reply(`holey be! artık ismin **${Name}** :tada:`);
         return;
     }
@@ -31,12 +31,13 @@ exports.run = async (Moderation, message, args) => {
     if (HistoryData.History.Names) HistoryData.History.Names.reverse();
     message.channel.send(new MessageEmbed().setColor("RANDOM").setDescription(HistoryData.History.Names.length > 0 ? [
         `Bu Kullanıcının Sunucudaki Eski İsimleri [ **${HistoryData.History.Names.length}** ]\n`,
-        `${HistoryData.History.Names.map((data) => `\`▫️ ${data.Name}\` (${data.Reason})`).join("\n")}`] : `${Member.toString()} kişisinin ismi "**${isim.slice(2)}**" olarak değiştirildi.`
+        `${HistoryData.History.Names.map((data) => `\`▫️ ${data.Name}\` (${data.Reason})`).join("\n")}`] : `${Member.toString()} kişisinin ismi "**${NewName.slice(2)}**" olarak değiştirildi.`
     ));
 };
 
 exports.conf = {
     commands: ["isim", "name", "nick"],
     enabled: true,
-    usage: "isim ([Nick](Booster) | [Üye] [İsim] [Yaş])"
+    usage: "
+    ([Nick](Booster) | [Üye] [İsim] [Yaş])"
 };
