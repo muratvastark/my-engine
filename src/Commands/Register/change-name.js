@@ -1,6 +1,7 @@
 const { BoosterRole, SecondTag, Tag } = global.Moderation.Defaults;
 const { Register } = global.Moderation.Permissions;
 const { MessageEmbed } = require("discord.js");
+const { UserModel }= require("../../Helpers/models.js");
 
 exports.run = async (Moderation, message, args) => {
     if (message.member.roles.cache.has(BoosterRole) && message.mentions.users.size <= 0) {
@@ -25,7 +26,13 @@ exports.run = async (Moderation, message, args) => {
     const NewName = `${Member.user.username.includes(Tag) ? Tag : SecondTag} ${Name} | ${Age}`;
     if (NewName.length > 30) return message.channel.send("Kullanıcının adı değiştirilemedi. İsim 30 karakteri geçemez.");
     Member.setNickname(NewName);
-    message.channel.send(new MessageEmbed().setColor("RANDOM").setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true })).setDescription(`${Member} kişisinin ismi başarıyla **${NewName.slice(1)}** olarak değiştirildi.`));
+
+    const HistoryData = (await UserModel.findOne({ Id: Member.id }).exec()) || { History: { Names: [] } }
+    if (HistoryData.History.Names) HistoryData.History.Names.reverse();
+    message.channel.send(new MessageEmbed().setColor("RANDOM").setDescription(HistoryData.History.Names.length > 0 ? [
+        `Bu Kullanıcının Sunucudaki Eski İsimleri [ **${HistoryData.History.Names.length}** ]\n`,
+        `${HistoryData.History.Names.map((data) => `\`▫️ ${data.Name}\` (${data.Reason})`).join("\n")}`] : `${Member.toString()} kişisinin ismi "**${isim.slice(2)}**" olarak değiştirildi.`
+    ));
 };
 
 exports.conf = {
