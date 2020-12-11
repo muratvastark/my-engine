@@ -81,7 +81,7 @@ Invite.on("voiceStateUpdate", (oldState, newState) => {
     const LogChannel = Invite.channels.cache.get(VoiceLog);
     if (LogChannel) {
         const User = Invite.users.cache.get(newState.id);
-        const Channel = newState.guild.channels.cache.get(newState.channelID).name;
+        const Channel = newState.channel.name;
         let content;
 
         if (!oldState.channelID && newState.channelID) content = `\`${User.tag}\` kullanıcısı \`${Channel}\` adlı sesli kanala **katıldı!**`;
