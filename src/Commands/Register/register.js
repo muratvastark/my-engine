@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { Tag, SecondTag, TagIntakeMode, Chat, TeamRole, MinStaffRole, BoosterRole } = global.Moderation.Defaults;
+const { Tag, SecondTag, TagIntakeMode, TeamRole, MinStaffRole, BoosterRole, ChatChannel } = global.Moderation.Defaults;
 const { UserModel }= require("../../Helpers/models.js");
 const { Register } = global.Moderation.Permissions;
 
@@ -16,7 +16,7 @@ exports.run = async (Moderation, message, args) => {
     const Name = args.filter(arg => isNaN(arg)).map(arg => arg.charAt(0).replace('i', "İ").toUpperCase()+arg.slice(1)).join(" ");
     const Age = args.filter(arg => !isNaN(arg))[0] || undefined;
 
-    if (!Name || !Age) message.channel.send("Geçerli isim ve yaş girmelisin!");
+    if (!Name || !Age) return message.channel.send("Geçerli isim ve yaş girmelisin!");
     let isim = `${Member.user.username.includes(Tag) ? Tag : SecondTag} ${Name} | ${Age}`;
     if (isim.length > 30) return message.channel.send("İsim ve yaş ile birlikte toplam 30 karakteri geçecek bir isim giremezsin.");
     const Embed = new MessageEmbed().setColor("RANDOM");
@@ -54,7 +54,7 @@ exports.run = async (Moderation, message, args) => {
         Collector.stop();
         NewMessage.reactions.removeAll();
         if (Member.user.username.includes(Tag)) Member.roles.add(TeamRole).catch(console.error);
-        const Channel = Moderation.channels.cache.get(Chat);
+        const Channel = Moderation.channels.cache.get(ChatChannel);
         if (Channel) Channel.send(`${Member} aramıza katıldı.`);
     });
 };
