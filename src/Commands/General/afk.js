@@ -36,7 +36,7 @@ exports.run = async (Moderation, message, args) => {
     const Reason = args.join(" ") || "";
     const InviteRegExp = /(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i;
 
-    if (InviteRegExp.test(message.content) || !message.deleted) return;
+    if (InviteRegExp.test(message.content) || message.deleted) return;
     Afk.set(message.author.id, {
         Reason: Reason.length > 0 ? Reason.slice(0, 2000) : null,
         Now: Date.now()
