@@ -4,8 +4,8 @@ const { MessageEmbed } = require("discord.js");
 const { UserModel }= require("../../Helpers/models.js");
 
 exports.run = async (Moderation, message, args) => {
-    if (message.member.roles.cache.has(BoosterRole) && message.mentions.users.size <= 0) {
-        if (!args || !args.length   ) return message.reply("sunucudaki ismini mi değiştireceksin? Değiştireceksen bir isim girmelisin.");
+    if (message.member.roles.cache.has(BoosterRole) && (message.mentions.users.size <= 0 || args[0] && !message.guild.members.cache.get(args[0])) {
+        if (!args || !args.length) return message.reply("sunucudaki ismini mi değiştireceksin? Değiştireceksen bir isim girmelisin.");
         const Name = `${Member.user.username.includes(Tag) ? Tag : SecondTag} ${args.join(" ")}`;
         if (Name.length > 30) return message.reply("ismin 30 karakterden büyük olamaz.");
         message.member.setNickname(Name);
