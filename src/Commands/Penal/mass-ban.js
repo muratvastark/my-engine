@@ -3,7 +3,7 @@ const Penal = require("../../Helpers/penal.js");
 const { Ban } = global.Moderation.Permissions;
 
 exports.run = async (Moderation, message, args) => {
-    if (message.member.check(Ban.MassBanAuthRoles) === false) return;
+    if (!Ban.MassBanAuthRoles.some(role => message.member.roles.cache.has(role)))) return;
 
     if (!args || !args.length || args.length < 1) return message.channel.send("Yasaklamak için bir takım üye belirt!");
 
