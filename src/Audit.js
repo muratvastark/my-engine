@@ -42,13 +42,6 @@ Audit.once("ready", () => {
     }, 5000);
 });
 
-Audit.on("guildUpdate", async (oldGuild, newGuild) => {
-    if (oldGuild.vanityURLCode === newGuild.vanityURLCode) return;
-    const Log = await oldGuild.fetchAuditLogs({ limit: 1, type: "GUILD_UPDATE" }).then(audit => audit.entries.first());
-    if (!Log || Log && (Log.executor.id === oldGuild.ownerID || Log.executor.id === Audit.user.id)) return;
-    patch(`https://discord.com/api/v8/guilds/${oldGuild.id}/vanity-url`, { code: `${require("../global.json").Defaults.InviteCode}` }, { headers: { Authorization: `Bot ${Audit.token}` } });
-});
-
 Audit.on("message", async(message) => {
     if (!message.guild || message.author.bot) return;
     if (!message.member.hasPermission("ADMINISTRATOR")) await messageAudit(message);
@@ -107,7 +100,7 @@ function setRoles(member, params) {
 }
 
 async function messageAudit(message) {
-    if (!message || !message.content) throw TypeError("Message Audit: Message is required!");
+    if (!message || message.deleted) return;
 
     const Content = message.content;
     const Mention = message.mentions;
