@@ -3,9 +3,9 @@ const { UserModel } = require("../../Helpers/models.js")
 const moment = require("moment");
 require("moment-duration-format");
 
-exports.run = async (Moderation, message) => {
+exports.run = async (Moderation, message, args) => {
     if (message.member.check() === false) return;
-    const User = message.mentions.users.first() || Invite.users.cache.get(args[0]) ;
+    const User = message.mentions.users.first() || Moderation.users.cache.get(args[0]) ;
     if (!User) return message.channel.send(`${message.author}, lütfen bir üye belirt.`);
     const History = (await UserModel.findOne({ Id: User.id }).exec()) || { History: { RoleLogs: [] } };
 
