@@ -2,7 +2,7 @@ const { patch } = require("axios");
 const { Client, MessageEmbed } = require("discord.js");
 const Audit = new Client({ fetchAllMembers: true });
 const Mongoose = require("mongoose");
-const { UnregisterRoles, BannedTags, Status, DatabaseName, BannedTagsRole, Tag, SecondTag, TeamRole, TagReception, AuditBotToken, BoosterRole, Prefix, VIP } = require("../global.json").Defaults;
+const { UnregisterRoles, BannedTags, Status, DatabaseName, BannedTagsRole, Tag, SecondTag, TeamRole, TagIntakeMode, AuditBotToken, BoosterRole, Prefix, VIP } = require("../global.json").Defaults;
 const CooldownXP = new Set();
 const Swears = ["allahoc", "allahoç", "allahamk", "allahaq", "0r0spuc0cu", "4n4n1 sk3r1m", "p1c", "p1ç", "@n@nı skrm", "orsb", "orsbcogu", "amnskm", "anaskm", "mk", "amk", "oc", "ag", "fuck", "seks", "sex", "0c", "ambiti", "am biti", "amcik", "amck", "amckl", "amina", "aminakoyarim", "amina koyarim", "amina koyayim", "aminakoyim", "aminda", "amindan", "amindayken", "amini", "aminoglu", "amin oglu", "amiyum", "amk", "amkafa", "amm", "ammak", "ammna","amnda", "amndaki", "amngtn", "amq", "amuna", "ana", "anaaann", "anal", "analarn", "anam", "anamla", "anan", "anana", "anandan", "anani", "ananin", "ananisikerim", "anani sikerim", "ananisikeyim", "anani sikeyim", "anann", "anasi", "anasinin", "anay", "anayin", "anneni", "annenin", "annesiz", "anuna", "aq", "a.q", "a.q.", "aq.", "babani", "bacini", "bacn", "bacndan", "bacy", "bastard", "beyinsiz", "bitch", "boner", "bosalmak", "cibiliyetsiz", "cibilliyetini", "cibilliyetsiz", "dallama", "daltassak", "dalyarak", "dangalak", "dassagi","kaltak", "kancik", "kappe", "karhane", "kavat", "kaypak", "kerane", "kerhane", "kerhanelerde", "kevase", "kevvase", "kodumun", "kodumunun", "koduumun", "koyarm", "koyiim", "koyiiym", "koyim", "koyum", "koyyim", "madafaka", "malafat", "malak", "mcik", "memelerini", "mincikliyim", "mna", "motherfucker", "oc", "ocuu", "o.ç", "o.ç.", "orosbucocuu", "orospu", "orospucocugu", "orospu cocugu", "orospudur", "orospular", "orospunun", "orospunun evlad\u0131", "orospuydu", "orospuyuz", "orostopol", "orrospu", "oruspu", "osbir", "otuzbir", "penis", "pezevek", "pezeven", "pezeveng", "pezevengi", "pezevenk", "pezo", "pic", "picler", "pipi", "porno", "pussy", "rahminde", "s1kerim", "s1kerm", "s1krm", "sakso", "saksofon", "saxo", "serefsiz", "sexs", "sie", "sik", "sikdi", "sikecem", "sikem", "siken", "sikenin", "siker", "sikerim", "sikerler", "sikersin", "sikeyim", "sikeym", "sikicem", "sikici", "sikiiim", "sikiiimmm", "sikiim", "sikiirken", "sikik", "sikilmi", "sikilmie", "sikilmis", "sikilsin", "sikim", "sikimde",  "sikime", "sikimi"];
 const Warning = {};
@@ -35,7 +35,7 @@ Audit.once("ready", () => {
 
                 members.filter((member) => !member.user.username.includes(Tag) && !member.roles.cache.has(BoosterRole) && !member.roles.cache.has(VIP)).forEach((member) => {
                     if (member.displayName.includes(Tag)) member.setNickname(member.displayName.replace(Tag, SecondTag)).catch(console.error);
-                    if (TagReception === false) member.roles.remove(member.roles.cache.filter((rol) => rol.position >= guild.roles.cache.get(TeamRole).position)).catch(console.error);
+                    if (TagIntakeMode === false) member.roles.remove(member.roles.cache.filter((rol) => rol.position >= guild.roles.cache.get(TeamRole).position)).catch(console.error);
                     else setRoles(member, UnregisterRoles);
                 });
             });
