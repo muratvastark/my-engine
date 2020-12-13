@@ -3,10 +3,10 @@ const { MessageEmbed } = require("discord.js");
 exports.run = async (Moderation, message, args) => {
     if (message.member.roles.highest.positon < message.guild.roles.cache.get(Moderation.Defaults.MinStaffRole).position) return;
 
-    const Channel = message.guild.channels.cache.get(args[0]) || message.channel;
+    const Channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel;
     const Snipes = Moderation.Snipes[Channel.id];
 
-    if (Snipes.length < 1) return message.channel.send(`${Channel} kanalında bot açıkken hiç mesaj silinmemiş.`);
+    if (!Snipes) return message.channel.send(`${Channel} kanalında bot açıkken hiç mesaj silinmemiş.`);
 
     const Embed = new MessageEmbed().setColor("RANDOM").setDescription(`${Channel} kanalında en son silinen 5 mesaj;`);
 
