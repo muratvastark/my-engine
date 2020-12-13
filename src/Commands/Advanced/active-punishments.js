@@ -19,7 +19,7 @@ exports.run = async (Moderation, message, args) => {
         data.Temporary === true ? `\`>\` **Ceza Bitiş Tarihi:** ${new Date(data.Finish).toTurkishFormatDate()}` : ""
     ] : "Bulunamadı.";
 
-    const JTB = Datas.filter(penal => penal.Type === "JAIL" || penal.Type === "TEMP-JAIL" || penal.Type === "BAN")[0];
+    const JTB = Datas.filter(penal => penal.Type === "JAIL" || penal.Type === "TEMP_JAIL" || penal.Type === "BAN")[0];
     const ChatMute = Datas.filter(penal => penal.Type === "CHAT_MUTE")[0];
     const VoiceMute = Datas.filter(penal => penal.Type === "VOICE_MUTE")[0];
     Embed.addField("Cezalı Bilgisi", getData(JTB));
