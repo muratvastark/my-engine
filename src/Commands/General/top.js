@@ -55,7 +55,7 @@ exports.run = async(client, message, [ option ]) => {
             ListItems.slice(0, 20).join("\n")
         ]));
     } else if (option === "levels") {
-        const Levels = await LevelModel.find({}).sort({ Level: -1 }).exec();
+        const Levels = await LevelModel.find({}).sort({ Level: -1, CurrentXP: -1 }).exec();
         const ListItems = Levels.filter((data) => message.guild.members.cache.get(data.Id)).map((data, i) => `**\`${i + 1}.\`** <@${data.Id}> • **${data.Level}** • \`${data.CurrentXP} / ${data.RequiredXP}\``);
         if (ListItems.length < 1) return message.channel.send("Üzgünüm seviye verisi bulamadım.");
 
