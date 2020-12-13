@@ -5,7 +5,7 @@ const VActivity = new Collection();
 const Suggestion = new Set();
 const { ServerID } = require("../global.json").Defaults;
 const Settings = require("../global.json").Invite;
-const { VoiceLog, Status, UnregisterRoles, Tag, BannedTagsRole, BannedTags, MinStaffRole, DatabaseName, SuggestionLog } = require("../global.json").Defaults;
+const { VoiceLog, Status, UnregisterRoles, SecondTag, BannedTagsRole, BannedTags, MinStaffRole, DatabaseName, SuggestionLog } = require("../global.json").Defaults;
 const { ChatMute, Jail, Suspect, Welcome } = require("../global.json").Permissions;
 const { InviteModel, UserModel, StatsModel, PenalModel } = require("./Helpers/models.js");
 const { connect } = require("mongoose");
@@ -81,16 +81,17 @@ Invite.on("voiceStateUpdate", (oldState, newState) => {
     const LogChannel = Invite.channels.cache.get(VoiceLog);
     if (LogChannel) {
         const User = Invite.users.cache.get(newState.id);
-        const Channel = newState.channel.name;
+        const Channel = Invite.channels.cache.get(newState.channelID);
+        if (!Channel) return;
         let content;
 
-        if (!oldState.channelID && newState.channelID) content = `\`${User.tag}\` kullanıcısı \`${Channel}\` adlı sesli kanala **katıldı!**`;
-        if (oldState.channelID && !newState.channelID) content = `\`${User.tag}\` üyesi \`${Channel}\` adlı sesli kanaldan **ayrıldı!**`;
-        if (oldState.channelID && newState.channelID && oldState.channelID != newState.channelID) content = `\`${User.tag}\` üyesi ses kanalını **değiştirdi!** (\`${newState.guild.channels.cache.get(oldState.channelID).name}\` => \`${Channel}\`)`;
-        if (oldState.channelID && oldState.selfMute && !newState.selfMute) content = `\`${User.tag}\` kullanıcısı \`${Channel}\` adlı sesli kanalda kendi susturmasını **kaldırdı!**`;
-        if (oldState.channelID && !oldState.selfMute && newState.selfMute) content = `\`${User.tag}\` kullanıcısı \`${Channel}\` adlı sesli kanalda kendini **susturdu!**`;
-        if (oldState.channelID && oldState.selfDeaf && !newState.selfDeaf) content = `\`${User.tag}\` kullanıcısı \`${Channel}\` adlı sesli kanalda kendi sağırlaştırmasını **kaldırdı!**`;
-        if (oldState.channelID && !oldState.selfDeaf && newState.selfDeaf) content = `\`${User.tag}\` kullanıcısı \`${Channel}\` adlı sesli kanalda kendini **sağırlaştırdı!**`;
+        if (!oldState.channelID && newState.channelID) content = `\`${User.tag}\` kullanıcısı \`${Channel.name}\` adlı sesli kanala **katıldı!**`;
+        if (oldState.channelID && !newState.channelID) content = `\`${User.tag}\` üyesi \`${Channel.name}\` adlı sesli kanaldan **ayrıldı!**`;
+        if (oldState.channelID && newState.channelID && oldState.channelID != newState.channelID) content = `\`${User.tag}\` üyesi ses kanalını **değiştirdi!** (\`${newState.guild.channels.cache.get(oldState.channelID).name}\` => \`${Channel.name}\`)`;
+        if (oldState.channelID && oldState.selfMute && !newState.selfMute) content = `\`${User.tag}\` kullanıcısı \`${Channel.name}\` adlı sesli kanalda kendi susturmasını **kaldırdı!**`;
+        if (oldState.channelID && !oldState.selfMute && newState.selfMute) content = `\`${User.tag}\` kullanıcısı \`${Channe.namel}\` adlı sesli kanalda kendini **susturdu!**`;
+        if (oldState.channelID && oldState.selfDeaf && !newState.selfDeaf) content = `\`${User.tag}\` kullanıcısı \`${Channel.name}\` adlı sesli kanalda kendi sağırlaştırmasını **kaldırdı!**`;
+        if (oldState.channelID && !oldState.selfDeaf && newState.selfDeaf) content = `\`${User.tag}\` kullanıcısı \`${Channel.name}\` adlı sesli kanalda kendini **sağırlaştırdı!**`;
         LogChannel.send(content).catch(() => undefined);
     }
 
@@ -130,14 +131,14 @@ Invite.on("guildMemberAdd", async (member) => {
         } else {
             const Roles = [...UnregisterRoles];
             if (penals.some((penal) => penal.Type === "CHAT_MUTE")) Roles.push(ChatMute.Role);
-            member.setNickname(`${Tag} İsim | Yaş`);
+            member.setNickname(`${SecondTag} İsim | Yaş`);
             setRoles(member, Roles);
         }
 
         if (WelcomeChannel) WelcomeChannel.send([
             `Sunucumuza hoş geldin, ${member}! Hesabın ${Moment(member.user.createdAt).format("Do MMMM YYYY hh:mm")} tarihinde oluşturulmuş. ${Fake ? ":no_entry_sign:" : ""}\n`,
             `Sunucuya erişebilmek için teyit odalarında kayıt olup isim yaş belirtmen gerekmektedir.`,
-            `<#778983773932748820> kanalından sunucu kurallarımızı okumayı ihmal etme!\n`,
+            `<#785931044070752336> kanalından sunucu kurallarımızı okumayı ihmal etme!\n`,
             `Seninle beraber ${member.guild.memberCount} kişiyiz. :tada::tada::tada:\n`
         ]);
     });
