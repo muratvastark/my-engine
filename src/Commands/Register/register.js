@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { Tag, SecondTag, TagIntakeMode, TeamRole, MinStaffRole, BoosterRole, ChatChannel } = global.Moderation.Defaults;
+const { Tag, SecondTag, TagIntakeMode, TeamRole, MinStaffRole, BoosterRole, ChatChannel, VIP } = global.Moderation.Defaults;
 const { UserModel }= require("../../Helpers/models.js");
 const { Register } = global.Moderation.Permissions;
 
@@ -34,16 +34,22 @@ exports.run = async (Moderation, message, args) => {
     await NewMessage.react(Register.WomanEmoji);
     const Collector = await NewMessage.createReactionCollector((reaction, user) => [Register.ManEmoji, Register.WomanEmoji].includes(reaction.emoji.id) && user.id === message.author.id, { max: 1, time: 25000 });
 
-    Collector.on("collect", (reaction, user) => {
+    Collector.on("collect", (reaction) => {
         if (reaction.emoji.id === Register.ManEmoji) {
             Collector.stop();
-            Member.setRoles(Register.ManRoles);
+            const Roles = [...Register.ManRoles];
+            if (Member.user.username.includes(Tag)) Roles.push(TeamRole);
+            if (Member.roles.cache.has(VIP)) Roles.push(VIP);
+            Member.setRoles(Roles);
             global.updateUser(message.author.id, "Man", 1);
             global.addName(Member.id, isim, `<@&${Register.ManRoles[0]}>`);
             NewMessage.edit(Embed.setDescription(`${Member.toString()} kişisi başarıyla \`erkek\` olarak kaydedildi.`));
         } else if (reaction.emoji.id === Register.WomanEmoji) {
             Collector.stop();
-            Member.setRoles(Register.WomanRoles);
+            const Roles = [...Register.WomanRoles];
+            if (Member.user.username.includes(Tag)) Roles.push(TeamRole);
+            if (Member.roles.cache.has(VIP)) Roles.push(VIP);
+            Member.setRoles(Roles);
             global.updateUser(message.author.id, "Woman", 1);
             global.addName(Member.id, isim, `<@&${Register.WomanRoles[0]}>`);
             NewMessage.edit(Embed.setDescription(`${Member.toString()} kişisi başarıyla \`kadın\` olarak kaydedildi.`));
@@ -53,7 +59,6 @@ exports.run = async (Moderation, message, args) => {
     Collector.on("end", () => {
         Collector.stop();
         NewMessage.reactions.removeAll();
-        if (Member.user.username.includes(Tag)) Member.roles.add(TeamRole).catch(console.error);
         const Channel = Moderation.channels.cache.get(ChatChannel);
         if (Channel) Channel.send(`${Member} aramıza katıldı.`);
     });
