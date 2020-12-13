@@ -13,7 +13,7 @@ exports.run = async (Moderation, message, args) => {
     const Embed = new MessageEmbed().setAuthor(User.tag, User.avatarURL({ dynamic: true })).setColor("RANDOM");
     const LevelData = await LevelModel.findOne({ Id: User.id }).exec();
     if (LevelData) {
-        const UserRank = (await LevelModel.find({}).sort({ Level: -1 }).exec()).findIndex(data => data.Id === User.id)+1;
+        const UserRank = (await LevelModel.find({}).sort({ Level: -1, CurrentXP: -1 }).exec()).findIndex(data => data.Id === User.id)+1;
         const card = new Rank()
             .setUsername(User.username)
             .setDiscriminator(User.discriminator)
