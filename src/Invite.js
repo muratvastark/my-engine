@@ -2,9 +2,8 @@ const { Collection, Client, MessageEmbed } = require("discord.js");
 const Invite = new Client();
 const Invites = new Collection();
 const VActivity = new Collection();
-const { ServerID } = require("../global.json").Defaults;
 const Settings = require("../global.json").Invite;
-const { VoiceLog, Status, UnregisterRoles, SecondTag, BannedTagsRole, BannedTags, MinStaffRole, DatabaseName, WelcomeChannelID } = require("../global.json").Defaults;
+const { VoiceLog, Status, UnregisterRoles, SecondTag, BannedTagsRole, BannedTags, MinStaffRole, DatabaseName, WelcomeChannelID, MongoURL } = require("../global.json").Defaults;
 const { ChatMute, Jail, Suspect } = require("../global.json").Permissions;
 const { InviteModel, UserModel, StatsModel, PenalModel } = require("./Helpers/models.js");
 const { connect } = require("mongoose");
@@ -13,14 +12,14 @@ Moment.locale("tr");
 const Logs = require("discord-logs");
 Logs(Invite);
 
-connect("MONGO_URL".replace("<dbname>", DatabaseName), {
+connect(MongoURL.replace("<dbname>", DatabaseName), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
 });
 
 Invite.on("ready", () => {
-    Invite.guilds.cache.get(ServerID).fetchInvites().then((_invite) => Invites.set(_invite.first().guild.id, _invite))
+    Invite.guilds.cache.first().fetchInvites().then((_invite) => Invites.set(_invite.first().guild.id, _invite))
     Invite.user.setPresence({ activity: { name: Status, type: "WATCHING" } });
 
     Invite.guilds.cache.first().channels.cache.filter((e) => e.type == "voice" && e.members.filter((member) => !member.user.bot && !member.voice.selfDeaf).size > 0).forEach((channel) => {
@@ -186,23 +185,20 @@ function voiceInit(member, channel, duration) {
     StatsModel.findOne({ Id: member }, (err, data) => {
         if (err) return console.error(err);
         if (!data) {
-            let voiceMap = new Map();
-            let chatMap = new Map();
-            voiceMap.set(channel, duration);
-            let newMember = new StatsModel({
+            const VoiceMap = new Map(), ChatMap = new Map();
+            VoiceMap.set(channel, duration);
+            return new StatsModel({
                 Id: member,
-                Voice: voiceMap,
+                Voice: VoiceMap,
                 TotalVoice: Number(duration),
-                Message: chatMap,
+                Message: ChatMap,
                 TotalMessage: 0
-            });
-            newMember.save();
-        } else {
-            let onceki = data.Voice.get(channel) || 0;
-            data.Voice.set(channel, Number(onceki)+duration);
-            data.TotalVoice = Number(data.TotalVoice)+Number(duration);
-            data.save();
-        };
+            }).save();
+        } 
+        const OldChannelStats = data.Voice.get(channel) || 0;
+        data.Voice.set(channel, Number(OldChannelStats)+duration);
+        data.TotalVoice = Number(data.TotalVoice)+Number(duration);
+        data.save();
     });
 }
 
