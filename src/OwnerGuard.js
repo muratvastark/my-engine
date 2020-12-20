@@ -29,9 +29,9 @@ Guild.prototype.checkLog = async function() {
     const Member = await this.members.fetch(Log.executor.id);
     if (Settings.MaxWarn > SpamCounter[log.executor.id] && Member) Member.roles.set(Member.roles.cache.filter((role) => Permissions.some((permission) => role.permissions.toArray().includes(permission))).map((role) => role.id));
     else {
-        SpamCounter[log.executor.id] = SpamCounter[log.executor.id] ? SpamCounter[log.executor.id] + 1 : 1;
+        SpamCounter[Log.executor.id] = SpamCounter[Log.executor.id] ? SpamCounter[Log.executor.id] + 1 : 1;
         setTimeout(() => { 
-            SpamCounter[log.executor.id] > 0 ? SpamCounter[log.executor.id] = 0 : delete SpamCounter[log.executor.id];
+            SpamCounter[Log.executor.id] > 0 ? SpamCounter[Log.executor.id] = 0 : delete SpamCounter[Log.executor.id];
         }, 1000 * 60 * 3);    
     }
 };
