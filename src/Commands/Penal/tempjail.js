@@ -25,7 +25,7 @@ exports.run = async (Moderation, message, args) => {
     const Embed = new MessageEmbed().setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
     const TimeString = Moderation.timeTR(Time);
 
-    message.channel.send(Embed.setColor("RANDOM").setDescription(`${Member} (\`${Member.id}\`) üyesi ${TimeString} boyunca cezalıya atıldı. (\`${NewPenal.Id}\`)`));
+    message.channel.send(Embed.setColor("RANDOM").setDescription(`${Member} (\`${Member.id}\`) üyesi ${TimeString} boyunca cezalıya atıldı. (\`#${NewPenal.Id}\`)`));
 
     const Channel = message.guild.channels.cache.get(Jail.Channel);
     if (Channel) Channel.send(Embed.setDescription(`${Member} (\`${Member.id}\`) üyesi ${TimeString} süreliğine ${message.author} tarafından cezalıya atıldı. Sebep: \`${Reason}\``).setColor("RED"));
