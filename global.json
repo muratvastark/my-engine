@@ -1,31 +1,35 @@
-﻿{
-   "Defaults":{
-      "ServerID":"",
-      "Token":"",
+{
+   "Defaults": {
+      "Token": "",
       "AuditBotToken": "",
       "InviteCode": "",
       "DatabaseName": "",
+      "MongoURL": "",
       "VoiceLog": "",
-      "Prefix":".",
-      "VoiceChannelID":"",
-      "Developers":[],
-      "Status":"Server ❤️ Muratva Stark",
-      "MinStaffRole":"",
-      "UnregisterRoles":[],
-      "BannedTags":[],
-      "BannedTagsRole":"",
-      "TagChannel":"",
-      "Tag":"",
+      "Prefix": ".",
+      "VoiceChannelID": "",
+      "Developers": [],
+      "Status": "Server ❤️ Muratva Stark",
+      "MinStaffRole": "",
+      "UnregisterRoles": [],
+      "BannedTags": [],
+      "BannedTagsRole": "",
+      "TagChannel": "",
+      "Tag": "",
       "BoosterRole": "",
-      "TagIntakeMode":true,
-      "SecondTag":"",
-      "TeamRole":"",
-      "PermCommands":[
-         { "UsePeople": [], "Usages": [], "Roles": [] }
+      "TagIntakeMode": true,
+      "SecondTag": "",
+      "TeamRole": "",
+      "PermCommands": [
+         {
+            "UsePeople": [],
+            "Usages": [],
+            "Roles": []
+         }
       ],
-      "ChatChannel":"",
-      "TransportAuthRoles":[],
-      "CommandLogChannel":"",
+      "ChatChannel": "",
+      "TransportAuthRoles": [],
+      "CommandLogChannel": "",
       "VIP": "",
       "WelcomeChannel": ""
    },
@@ -33,48 +37,48 @@
       "Token": "",
       "Channel": ""
    },
-   "Permissions":{
-      "Meeting":{
-         "Role":"",
-         "Log":""
+   "Permissions": {
+      "Meeting": {
+         "Role": "",
+         "Log": ""
       },
-      "Register":{
-         "AuthRoles":[],
-         "ManRoles":[],
-         "WomanRoles":[],
-         "ManEmoji":"",
-         "WomanEmoji":""
+      "Register": {
+         "AuthRoles": [],
+         "ManRoles": [],
+         "WomanRoles": [],
+         "ManEmoji": "",
+         "WomanEmoji": ""
       },
-      "Ban":{
-         "AuthRoles":[],
-         "MassBanAuthRoles":[],
-         "Channel":"",
-         "Image":"",
-         "Limit":3
+      "Ban": {
+         "AuthRoles": [],
+         "MassBanAuthRoles": [],
+         "Channel": "",
+         "Image": "",
+         "Limit": 3
       },
-      "Jail":{
-         "AuthRoles":[],
-         "Channel":"",
-         "Role":"",
-         "Limit":5
+      "Jail": {
+         "AuthRoles": [],
+         "Channel": "",
+         "Role": "",
+         "Limit": 5
       },
-      "ChatMute":{
-         "AuthRoles":[],
-         "Channel":"",
-         "Role":""
+      "ChatMute": {
+         "AuthRoles": [],
+         "Channel": "",
+         "Role": ""
       },
-      "VoiceMute":{
-         "AuthRoles":[],
-         "Channel":""
+      "VoiceMute": {
+         "AuthRoles": [],
+         "Channel": ""
       },
-      "Suspect":{
-         "Role":"",
-         "Channel":"",
-         "Days":7
+      "Suspect": {
+         "Role": "",
+         "Channel": "",
+         "Days": 7
       }
    },
-   "Guard":{
+   "Guard": {
       "SafePersons": [],
-      "Token":""
+      "Token": ""
    }
 }
