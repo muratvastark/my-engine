@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => {
-    // if (!client.Defaults.Developers.includes(message.author.id)) return;
+    if (!client.Defaults.Developers.includes(message.author.id)) return;
     if (!args[0]) return;
     const code = args.join(" ");
     function clean(text) {
