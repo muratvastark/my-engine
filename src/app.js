@@ -6,10 +6,9 @@ const Defaults = (Moderation.Defaults = require("../global.json").Defaults);
 Moderation.Permissions = require("../global.json").Permissions;
 Moderation.Snipes = {};
 const { CronJob } = require("cron");
-const { StatsModel } = require("./Helpers/models.js");
 const fs = require("fs");
 
-Mongoose.connect("mongodb+srv://muratvastark:airg@123@cluster0.gl8a4.mongodb.net/<dbname>?retryWrites=true&w=majority".replace("<dbname>", Defaults.DatabaseName), {
+Mongoose.connect(Defaults.MongoURL.replace("<dbname>", Defaults.DatabaseName), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -36,12 +35,12 @@ Mongoose.connection.once("open", () => {
         Moderation.on(File.conf.event, File.execute);
     });
 
-    const resetStats = new CronJob('00 00 00 * * 1', async function() {
-      const guild = Moderation.guilds.cache.first();
-      const newData = new Map();
-      await Stats.updateMany({}, { Voice: newData, Message: newData });
-    }, null, true, 'Europe/Istanbul');
-    resetStats.start();
+    const { Stats } = require("./Helpers/models.js");
+    const ResetStats = new CronJob("00 00 00 * * 1", async function() {
+      const NewData = new Map();
+      await Stats.updateMany({}, { Voice: NewData, Message: NewData });
+    }, null, true, "Europe/Istanbul");
+    ResetStats.start();
 
     Moderation.login(Defaults.Token).then(() => console.log(`[MODERATION] ${Moderation.user.tag} is connected!`)).catch(() => console.error("[MODERATION] Bot is not connected!"));
 });
