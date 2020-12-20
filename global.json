@@ -27,17 +27,13 @@
       "TransportAuthRoles":["784506407633420311"],
       "CommandLogChannel":"784506562312011776",
       "VIP": "784506417796087828",
-      "SuggestionLog": ""
+      "WelcomeChannel": ""
    },
    "Invite": {
       "Token": "Nzg1NDc3NTg1NjcyNDcwNTQ5.X84bAQ.O7_04wkeuDvocdI5qip8zvbIelk",
       "Channel": "784870378479681566"
    },
    "Permissions":{
-      "Welcome":{
-         "Channel":"784506489821200496",
-         "Image":"https://cdn.discordapp.com/attachments/776485692905488415/785215967575408660/0f7a344cec089f3b87f02e00ba00bddd.gif"
-      },
       "Meeting":{
          "Role":"784506409282174988",
          "Log":"785218033207476286"
