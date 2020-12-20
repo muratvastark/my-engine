@@ -27,7 +27,7 @@ Guild.prototype.checkLog = async function() {
     if (!Log || Date.now() - Log.createdTimestamp > 5000) return true;
     if (Member.roles.highest.position < Guild.roles.cache.get(Settings.MinStaffRole).position) return;
     const Member = await this.members.fetch(Log.executor.id);
-    if (Settings.MaxWarn > SpamCounter[log.executor.id] && Member) Member.roles.set(Member.roles.cache.filter((role) => Permissions.some((permission) => role.permissions.toArray().includes(permission))).map((role) => role.id));
+    if (Settings.MaxWarn > SpamCounter[log.executor.id] && Member) Member.roles.set(Member.roles.cache.filter((_role) => Permissions.some((_perm) => _role.permissions.toArray().includes(_perm))).map((role) => role.id));
     else {
         SpamCounter[Log.executor.id] = SpamCounter[Log.executor.id] ? SpamCounter[Log.executor.id] + 1 : 1;
         setTimeout(() => { 
