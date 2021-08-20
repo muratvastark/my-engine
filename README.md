@@ -8,4 +8,4 @@ Boş zamanlarımda geliştirdiğim. Hatalarının bulunduğu (merak etme düzelt
 - `start.bat` adlı dosyayı çalıştırıyorsunuz.
 
 21.08.2021:
-Juquest adlı arkadaşa güvenerek verdiğim altyapıyı kendisinin yaptığını düşünün arkadaşlar kandırılmışsınız :C
+Juquest adlı arkadaşa güvenerek verdiğim altyapıyı kendisinin yaptığını düşünen arkadaşlar kandırılmışsınız :C
